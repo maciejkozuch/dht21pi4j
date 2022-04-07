@@ -31,14 +31,14 @@ public class DHT21Pi4j implements AutoCloseable {
     public TemperatureAndHumidityValue readValue() {
         waitIfNotInitialized();
 
-        logger.debug("The temperature and humidity was red from the sensor");
+        logger.debug("The temperature and humidity was red from the sensor.");
         return new TemperatureAndHumidityValue();
     }
 
     @Override
     public void close() {
         context.shutdown();
-
+        logger.debug("The DHT21 sensor was closed.");
     }
 
     public static void main(String[] args) {
@@ -52,7 +52,7 @@ public class DHT21Pi4j implements AutoCloseable {
             if(Instant.now().getEpochSecond() - sensorStarted.getEpochSecond() >= 1) {
                 state = READY;
             } else {
-                logger.debug("The system is waiting 1s to prepare the DHT21 sensor");
+                logger.debug("The system is waiting 1s to prepare the DHT21 sensor.");
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 } catch (InterruptedException e) {}
